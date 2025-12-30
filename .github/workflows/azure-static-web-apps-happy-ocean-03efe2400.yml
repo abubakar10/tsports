@@ -34,6 +34,14 @@ jobs:
         run: |
           cd frontend
           npm run build
+          echo "Build completed. Checking dist folder contents:"
+          ls -la dist/
+          echo "Checking built index.html:"
+          head -20 dist/index.html
+      
+      - name: Copy staticwebapp.config.json to dist
+        run: |
+          cp staticwebapp.config.json frontend/dist/staticwebapp.config.json || echo "Config file copy skipped (may not be needed)"
       
       - name: Build And Deploy
         id: builddeploy
@@ -46,7 +54,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "./frontend" # App source code path
           api_location: "api" # Api source code path - optional
-          output_location: "dist" # Built app content directory - optional
+          output_location: "dist" # Built app content directory - relative to app_location
           skip_app_build: true # Skip build since we build manually above
           ###### End of Repository/Build Configurations ######
 
