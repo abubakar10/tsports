@@ -51,8 +51,15 @@ module.exports = async function (context, req) {
       'waitlist'
     )
 
-    // Ensure table exists
-    await tableClient.createTable()
+    // Ensure table exists (ignore error if table already exists)
+    try {
+      await tableClient.createTable()
+    } catch (createError) {
+      // Table already exists (409) or other error - ignore if it's a conflict
+      if (createError.statusCode !== 409) {
+        throw createError
+      }
+    }
 
     // Check for duplicate email
     const partitionKey = 'emails'
