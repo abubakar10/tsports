@@ -2,6 +2,9 @@
   "name": "tradexsports-api",
   "version": "1.0.0",
   "description": "Azure Functions for TradeXSports waitlist",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "func start --port 7072"
   },
