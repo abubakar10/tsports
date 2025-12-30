@@ -1,0 +1,10 @@
+*.js.map
+*.js.once
+*.log
+.git*
+.vscode
+local.settings.json
+test
+.nyc_output
+
+
