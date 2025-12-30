@@ -1,12 +1,18 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/api/*", "/_framework/*", "*.{css,scss,js,map,woff,woff2}"]
+    "exclude": ["/api/*", "/_framework/*", "*.{css,scss,js,mjs,map,woff,woff2,json,ico,png,jpg,jpeg,svg,webp}"]
   },
   "routes": [
     {
       "route": "/api/*",
       "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/*.{js,mjs}",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
     }
   ],
   "responseOverrides": {
@@ -14,6 +20,9 @@
       "rewrite": "/index.html",
       "statusCode": 200
     }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff"
   }
 }
 
